@@ -146,7 +146,13 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
         'App\Providers\ComposerServiceProvider',
-        'Zizaco\Entrust\EntrustServiceProvider'
+        'Zizaco\Entrust\EntrustServiceProvider',
+
+        /**
+         * Custom Service Providers
+         */
+        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+        'Barryvdh\Debugbar\ServiceProvider'
 	],
 
 	/*
@@ -194,6 +200,7 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+		'Debugbar' => 'Barryvdh\Debugbar\Facade',
         'Entrust' => 'Zizaco\Entrust\EntrustFacade',
         'Form'=> 'Illuminate\Html\FormFacade',
         'HTML'=> 'Illuminate\Html\HtmlFacade',
