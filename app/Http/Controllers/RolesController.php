@@ -2,10 +2,21 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Entrust\Role;
+use App\Role;
 use Illuminate\Http\Request;
 
 class RolesController extends Controller {
+
+	/**
+	 * Create a new controller instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
+
 
 	/**
 	 * Display a listing of the resource.
@@ -15,6 +26,19 @@ class RolesController extends Controller {
 	public function index()
 	{
 		$roles = Role::all();
+
+		return $roles;
+	}
+
+
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function paginate()
+	{
+		$roles = Role::paginate(5);
 
 		return $roles;
 	}

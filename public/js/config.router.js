@@ -68,6 +68,30 @@ angular.module('app')
                       }]
                   }
               })
+              .state('app.roles', {
+                  url: '/roles',
+                  templateUrl: 'tpl/roles.html',
+                  resolve: {
+                    deps: ['$ocLazyLoad',
+                      function( $ocLazyLoad ){
+                        return $ocLazyLoad.load(['js/controllers/roles.js']);
+                    }]
+                  }
+              })
+              .state('app.role', {
+                  url: '/role/{roleId:[0-9]{1,4}}',
+                  templateUrl: 'tpl/role.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                        function( $ocLazyLoad ){
+                          return $ocLazyLoad.load('xeditable').then(
+                              function(){
+                                  return $ocLazyLoad.load('js/controllers/roles.js');
+                              }
+                          );
+                      }]
+                  }
+              })
               .state('app.ui', {
                   url: '/ui',
                   template: '<div ui-view class="fade-in-up"></div>'
@@ -649,7 +673,7 @@ angular.module('app')
                 .state('music.playlist', {
                     url: '/playlist/{fold}',
                     templateUrl: 'tpl/music.playlist.html'
-                })
+                });
       }
     ]
   );

@@ -15,12 +15,11 @@ app.controller('UserController', ['$scope', '$http', 'users', '$stateParams', fu
     $scope.alerts.splice(index, 1);
   };
 
-
-
-  $scope.posts = [];
+  // Fetch Data With Pagination
+  $scope.posts      = [];
   $scope.totalPages = 0;
-  $scope.currentPage = 1;
-  $scope.range = [];
+  $scope.currentPage= 1;
+  $scope.range      = [];
 
   $scope.getPosts = function(pageNumber){
 
@@ -29,25 +28,23 @@ app.controller('UserController', ['$scope', '$http', 'users', '$stateParams', fu
     }
     $http.get('/api/user-limit?page='+pageNumber).success(function(response) {
 
-      $scope.posts        = response.data;
-      $scope.totalPages   = response.last_page;
-      $scope.currentPage  = response.current_page;
-      $scope.per_page     = response.per_page;
-      $scope.total        = response.total;
-      $scope.awal        = (response.current_page - 1) * response.per_page + 1;
-      $scope.akhir        = Math.min(response.total, response.current_page * response.per_page);
+    $scope.posts      = response.data;
+    $scope.totalPages = response.last_page;
+    $scope.currentPage= response.current_page;
+    $scope.per_page   = response.per_page;
+    $scope.total      = response.total;
+    $scope.awal       = (response.current_page - 1) * response.per_page + 1;
+    $scope.akhir      = Math.min(response.total, response.current_page * response.per_page);
 
-      // Pagination Range
-      var pages = [];
+    // Pagination Range
+    var pages = [];
+    for(var i=1;i<=response.last_page;i++) {
+      pages.push(i);
+    }
 
-      for(var i=1;i<=response.last_page;i++) {          
-        pages.push(i);
-      }
-
-      $scope.range = pages; 
+    $scope.range = pages;
 
     });
-
   };
 
 
@@ -78,12 +75,12 @@ app.controller('UserController', ['$scope', '$http', 'users', '$stateParams', fu
               $scope.users.splice(index, 1);
             }
           }
-        });;
+        });
   };
 
 }]);
 
-app.controller('EditUserCtrl', ['$scope', 'users', '$stateParams', '$filter', '$http', 'editableOptions', 'editableThemes', 
+app.controller('EditUserCtrl', ['$scope', 'users', '$stateParams', '$filter', '$http', 'editableOptions', 'editableThemes',
   function($scope, users, $stateParams, $filter, $http, editableOptions, editableThemes){
     editableThemes.bs3.inputClass = 'input-sm';
     editableThemes.bs3.buttonsClass = 'btn-sm';
@@ -112,7 +109,7 @@ app.controller('EditUserCtrl', ['$scope', 'users', '$stateParams', '$filter', '$
             password: user.password
         }).success(function(data, status, headers, config) {
             user = data;
-        });;
+        });
     };
 
 }]);
@@ -152,7 +149,7 @@ app.factory('users', ['$http', function ($http) {
 
 // Directive
 
-app.directive('postsPagination', function(){  
+app.directive('postsPagination', function(){
    return{
       restrict: 'E',
       template: '<ul class="pagination">'+

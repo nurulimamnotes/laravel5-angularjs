@@ -2,24 +2,22 @@
   <div class="row">
     <div class="col-sm-12 b-r">
       <h3 class="m-t-none m-b font-thin">Add Role</h3>
-      <form role="form" ng-controller="UserController">
+      <form role="form" ng-controller="RolesController">
+        <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="close($index)">{{alert.msg}}</alert>
         <div class="form-group">
-          <label>Name</label>
-          <input type="text" class="form-control" ng-model="user.name">
+          <label>Role Level</label>
+          <input type="text" class="form-control" ng-model="role.name">
         </div>
         <div class="form-group">
-          <label>Email</label>
-          <input type="email" class="form-control" ng-model="user.email">
+          <label>Role Name</label>
+          <input type="text" class="form-control" ng-model="role.display_name">
         </div>
         <div class="form-group">
-          <label>Password</label>
-          <input type="password" class="form-control" ng-model="user.password">
+          <label>Role Description</label>
+          <textarea class="form-control" ng-model="role.description"></textarea>
         </div>
         <div class="checkbox m-t-lg">
-          <button type="submit" class="btn btn-sm btn-success pull-right text-uc m-t-n-xs" ng-click="addUser()"><strong>Add Role</strong></button>
-        </div>
-        <div ng-repeat="role in roles">
-          {{ role.name }}
+          <button type="submit" class="btn btn-sm btn-success pull-right text-uc m-t-n-xs" ng-click="addRole(); added();"><strong>Add Role</strong></button>
         </div>
       </form>
     </div>

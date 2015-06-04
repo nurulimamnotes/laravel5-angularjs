@@ -21,6 +21,7 @@ Route::group(array('prefix'=>'/api'),function(){
    Route::get('user-limit', 'UserController@paginate');
     // Role Management
    Route::resource('roles','RolesController');
+   Route::get('role-limit', 'RolesController@paginate');
     // Assign Role
    Route::resource('role','RoleController');
 });

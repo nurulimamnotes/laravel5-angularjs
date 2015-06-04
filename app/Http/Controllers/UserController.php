@@ -27,7 +27,7 @@ class UserController extends Controller {
 	public function index()
 	{
 		$users = User::all();
-		
+
 		foreach ($users as $user) {
 			foreach ($user->roles as $role) {
 			}
@@ -45,7 +45,7 @@ class UserController extends Controller {
 	public function paginate()
 	{
 		$users = User::paginate(5);
-		
+
 		foreach ($users as $user) {
 			foreach ($user->roles as $role) {
 			}
