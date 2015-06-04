@@ -8,14 +8,14 @@ angular.module('app')
     [          '$rootScope', '$state', '$stateParams',
       function ($rootScope,   $state,   $stateParams) {
           $rootScope.$state = $state;
-          $rootScope.$stateParams = $stateParams;        
+          $rootScope.$stateParams = $stateParams;
       }
     ]
   )
   .config(
-    [          '$stateProvider', '$urlRouterProvider', 'JQ_CONFIG', 
+    [          '$stateProvider', '$urlRouterProvider', 'JQ_CONFIG',
       function ($stateProvider,   $urlRouterProvider, JQ_CONFIG) {
-          
+
           $urlRouterProvider
               .otherwise('/app/dashboard-v1');
           $stateProvider
@@ -44,6 +44,26 @@ angular.module('app')
                     }]
                   }
               })
+              .state('app.users', {
+                  url: '/users',
+                  templateUrl: 'tpl/users.html',
+                  resolve: {
+                    deps: ['$ocLazyLoad',
+                      function( $ocLazyLoad ){
+                        return $ocLazyLoad.load(['js/controllers/users.js']);
+                    }]
+                  }
+              })
+              .state('app.user', {
+                  url: '/user/{userId:[0-9]{1,4}}',
+                  templateUrl: 'tpl/user.html',
+                  resolve: {
+                    deps: ['$ocLazyLoad',
+                      function( $ocLazyLoad ){
+                        return $ocLazyLoad.load(['js/controllers/users.js']);
+                    }]
+                  }
+              })
               .state('app.ui', {
                   url: '/ui',
                   template: '<div ui-view class="fade-in-up"></div>'
@@ -63,7 +83,7 @@ angular.module('app')
               .state('app.ui.widgets', {
                   url: '/widgets',
                   templateUrl: 'tpl/ui_widgets.html'
-              })          
+              })
               .state('app.ui.bootstrap', {
                   url: '/bootstrap',
                   templateUrl: 'tpl/ui_bootstrap.html'
@@ -140,7 +160,7 @@ angular.module('app')
                             'js/app/map/ui-map.js',
                             'js/app/map/map.js'] ).then(
                               function(){
-                                return loadGoogleMaps(); 
+                                return loadGoogleMaps();
                               }
                             );
                       }]
@@ -563,7 +583,7 @@ angular.module('app')
                                   files: ['js/app/weather/skycons.js',
                                           'js/app/weather/angular-skycons.js',
                                           'js/app/weather/ctrl.js',
-                                          JQ_CONFIG.moment ] 
+                                          JQ_CONFIG.moment ]
                               }
                           );
                       }]
@@ -591,12 +611,12 @@ angular.module('app')
                       deps: ['$ocLazyLoad',
                         function( $ocLazyLoad ){
                           return $ocLazyLoad.load([
-                            'com.2fdevs.videogular', 
-                            'com.2fdevs.videogular.plugins.controls', 
+                            'com.2fdevs.videogular',
+                            'com.2fdevs.videogular.plugins.controls',
                             'com.2fdevs.videogular.plugins.overlayplay',
                             'com.2fdevs.videogular.plugins.poster',
                             'com.2fdevs.videogular.plugins.buffering',
-                            'js/app/music/ctrl.js', 
+                            'js/app/music/ctrl.js',
                             'js/app/music/theme.css'
                           ]);
                       }]

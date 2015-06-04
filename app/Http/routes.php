@@ -13,6 +13,10 @@
 
 Route::get('/', 'HomeController@index');
 
+Route::group(array('prefix'=>'/api'),function(){
+   Route::resource('users','UserController');
+});
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
